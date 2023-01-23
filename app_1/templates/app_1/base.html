@@ -1,0 +1,61 @@
+{% load tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% random_article as rnd_article %}
+{% random_slug as rnd_slug %}
+<h1>welcome here</h1>
+<p>some views to be showed below can be slightly modified due to simplicity</p>
+<br>
+<a href="{% url 'main' %}" style="display: block">Вернуться на основную страницу</a>
+<a href="{% url 'article' rnd_article %}" style="display: block">перейти на случайную статью (id)</a>
+<a href="{% url 'article_and_slug' rnd_article rnd_slug %}" style="display: block">перейти на случайную статью со случайным слагом (5-10 символов)</a>
+
+
+
+{% block view_1 %}
+    <p>base text for view 1</p>
+{% endblock %}
+
+{% block view_2 %}
+    <p>base text for view 2</p>
+{% endblock %}
+
+{% block view_3 %}
+    <p>base text for view 3</p>
+{% endblock %}
+
+{% block view_5 %}
+    <p>base text for view 5</p>
+{% endblock %}
+
+{% block view_6 %}
+    <p>base text for view 6</p>
+{% endblock %}
+
+{% block view_7 %}
+    <p>base text for view 7</p>
+{% endblock %}
+
+{% block view_8 %}
+    <p>base text for view 8</p>
+{% endblock %}
+
+{% block view_9 %}
+    <p>base text for view 9</p>
+{% endblock %}
+
+{% block view_10 %}
+    <p>base text for view 10</p>
+{% endblock %}
+
+{% block view_11 %}
+    <p>base text for view 11</p>
+{% endblock %}
+
+</body>
+</html>

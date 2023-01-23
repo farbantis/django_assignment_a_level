@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block view_8 %}
+    <h2>path('article/int:article_number/slug:slug_text/', view_8)</h2>
+        <h2>
+        {% if article_number|divisibleby:2 %}
+            номер статьи четный
+        {% else %}
+            номер статьи не четный
+        {% endif %}
+        {% if slug_text %}
+            {% include 'slug_text_8.html' with slug_text=slug_text %}
+        {% endif %}
+    </h2>
+    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci earum laboriosam quod?</div>
+{% endblock %}
