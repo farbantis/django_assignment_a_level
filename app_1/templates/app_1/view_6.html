@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block view_6 %}
+    <h2>path('article/int:article_number/', view_6)</h2>
+    <h2>
+        {% if article_number|divisibleby:2 %}
+            номер статьи четный
+        {% else %}
+            номер статьи не четный
+        {% endif %}
+    </h2>
+    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci earum laboriosam quod?</div>
+{% endblock %}
