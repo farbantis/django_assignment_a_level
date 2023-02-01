@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>you can create an aricle</div>
+{% for article in articles %}
+    <div>{{ article.author }}</div>
+    <div>{{ article.text }}</div>
+{#    {{ article.comment_set }}#}
+{#    {% for comment in article.comment_set %}#}
+{#        <div>{{ comment.text }}</div>#}
+{#    {% endfor %}#}
+{% endfor %}
+</body>
+</html>
