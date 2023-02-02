@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>list of articles</div>
+{% for article in articles %}
+    ==================================
+    <h2>this article was written by: <strong>{{ article.author }}</strong></h2>
+    <div>text: <strong>{{ article.text }}</strong></div>
+    <div>
+        likes: {{ article.like_set.all.count }} dislikes: {{ article.dislike_set.all.count }}
+    </div>
+        {% for comment in article.comment_set.all %}
+            <br>
+            <strong>{{ comment.author }}  on {{ comment.created_at }}</strong> commented:
+            <div>{{ comment.text }}</div>
+            <br>
+        {% endfor %}
+{% endfor %}
+
+</body>
+</html>
