@@ -25,7 +25,6 @@ class Author(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=255)
     author = models.ManyToManyField(Author)
-    quantity = models.SmallIntegerField(default=1)
 
     def __str__(self):
         return self.title
@@ -41,9 +40,7 @@ class LibraryVisitor(models.Model):
 class BookCard(models.Model):
     visitor = models.ForeignKey(LibraryVisitor, on_delete=models.DO_NOTHING)
     book = models.ForeignKey(Book, on_delete=models.DO_NOTHING)
-    date_took = models.DateTimeField(auto_now_add=True)
-    loan_days_num = models.SmallIntegerField(default=10)
-    date_returned = models.DateField(blank=True, null=True)
+    is_taken = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.book} taken by {self.visitor}'

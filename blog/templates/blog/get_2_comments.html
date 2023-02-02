@@ -1,0 +1,9 @@
+<div>the required two comments are:</div>
+{% for comment in comments %}
+    <div>
+        {{ comment.text }} by {{ comment.author }} created {{ comment.created_at }}
+        to article "{{ comment.article.text }}"
+        </div>
+        <br>
+    </div>
+{% endfor %}

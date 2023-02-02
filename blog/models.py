@@ -1,8 +1,6 @@
 import datetime
-
 from django.conf.global_settings import AUTH_USER_MODEL
 from django.db import models
-from django.utils import timezone
 
 
 class Author(models.Model):
@@ -24,12 +22,17 @@ class Article(models.Model):
 
 class Comment(models.Model):
     text = models.CharField(max_length=1000)
-    article = models.ForeignKey(Article, on_delete=models.DO_NOTHING)
-    author = models.ForeignKey(Author, on_delete=models.DO_NOTHING)
-    created_at = models.DateTimeField(auto_now_add=True)
+    article = models.ForeignKey(Article, on_delete=models.PROTECT)
+    author = models.ForeignKey(Author, on_delete=models.PROTECT)
+    created_at = models.DateTimeField()
 
     def __str__(self):
-        return f'by {self.author}'
+        return f'{self.text} by {self.author}'
+
+
+class CommentSpecial(Comment):
+    class Meta:
+        proxy: True
 
     def save(self, *args, **kwargs):
         self.created_at = datetime.datetime.now() - datetime.timedelta(days=365)
@@ -37,8 +40,8 @@ class Comment(models.Model):
 
 
 class LikeDislike(models.Model):
-    user = models.ForeignKey(Author, on_delete=models.DO_NOTHING)
-    article = models.ForeignKey(Article, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(Author, on_delete=models.PROTECT)
+    article = models.ForeignKey(Article, on_delete=models.PROTECT)
 
     class Meta:
         abstract = True
@@ -55,3 +58,26 @@ class DisLike(LikeDislike):
 
     def __str__(self):
         return f'By user {self.user} to article {self.article}'
+
+
+class LikeDislikeComment(models.Model):
+    user = models.ForeignKey(Author, on_delete=models.PROTECT)
+    comment = models.ForeignKey(Comment, on_delete=models.PROTECT)
+
+    class Meta:
+        abstract = True
+
+
+class LikeToComment(LikeDislikeComment):
+    """handles likes for comments"""
+
+    def __str__(self):
+        return f'By user {self.user} to comment {self.comment}'
+
+
+class DisLikeToComment(LikeDislikeComment):
+    """handles dislikes for comments"""
+
+    def __str__(self):
+        return f'By user {self.user} to comment {self.comment}'
+

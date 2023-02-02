@@ -6,14 +6,21 @@
 </head>
 <body>
 
-<div>you can create an aricle</div>
+<div>list of articles</div>
 {% for article in articles %}
-    <div>{{ article.author }}</div>
-    <div>{{ article.text }}</div>
-{#    {{ article.comment_set }}#}
-{#    {% for comment in article.comment_set %}#}
-{#        <div>{{ comment.text }}</div>#}
-{#    {% endfor %}#}
+    ==================================
+    <h2>this article was written by: <strong>{{ article.author }}</strong></h2>
+    <div>text: <strong>{{ article.text }}</strong></div>
+    <div>
+        likes: {{ article.like_set.all.count }} dislikes: {{ article.dislike_set.all.count }}
+    </div>
+        {% for comment in article.comment_set.all %}
+            <br>
+            <strong>{{ comment.author }}  on {{ comment.created_at }}</strong> commented:
+            <div>{{ comment.text }}</div>
+            <br>
+        {% endfor %}
 {% endfor %}
+
 </body>
 </html>
