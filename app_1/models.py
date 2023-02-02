@@ -38,8 +38,8 @@ class LibraryVisitor(models.Model):
 
 
 class BookCard(models.Model):
-    visitor = models.ForeignKey(LibraryVisitor, on_delete=models.DO_NOTHING)
-    book = models.ForeignKey(Book, on_delete=models.DO_NOTHING)
+    visitor = models.ForeignKey(LibraryVisitor, on_delete=models.PROTECT)
+    book = models.ForeignKey(Book, on_delete=models.PROTECT)
     is_taken = models.BooleanField(default=False)
 
     def __str__(self):
